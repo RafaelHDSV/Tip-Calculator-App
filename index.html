@@ -75,10 +75,23 @@
     .input_primary {
       outline: 0;
       border: none;
-      padding: .7rem 1rem;
+      padding: .7rem 2rem;
       border-radius: .5rem;
       background-color: var(--very_light_grayish_cyan);
+      text-align: end;
       font-size: 24px;
+      position: relative;
+    }
+
+    .input_primary::placeholder {
+      color: var(--grayish_cyan);
+    }
+
+    .icon_input {
+      position: absolute;
+      margin: 2.7% 0 0 1rem;
+      max-width: 1rem;
+      width: 100%;
     }
 
     .bill {
@@ -119,6 +132,7 @@
       <div class="bill">
         <label for="bill">Bill</label>
         <input id="bill" class="input_primary" type="text" name="bill" placeholder="0">
+        <img src="images/icon-dollar.svg" alt="icon-dollar.svg" class="icon_input">
       </div>
 
       <div class="select_tip">
@@ -128,6 +142,7 @@
       <div class="number_people">
         <label for="number_people">Number of People</label>
         <input id="number_people" class="input_primary" type="text" name="number_people" placeholder="0">
+        <img src="images/icon-person.svg" alt="icon-person.svg" class="icon_input">
       </div>
     </div>
 
