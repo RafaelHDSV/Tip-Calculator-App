@@ -54,8 +54,10 @@
       background-color: var(--white);
       border-radius: 2rem;
       padding: 3rem;
+      gap: 3rem;
       /* CORRIGIR */
-      width: 60rem;
+      max-width: 60rem;
+      width: 100%;
     }
 
     .options {
@@ -125,8 +127,41 @@
     }
 
     .results {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       width: 50%;
       height: 100%;
+      background-color: var(--very_dark_cyan);
+      border-radius: 1rem;
+      padding: 4rem 2rem 2rem 2rem;
+    }
+
+    .amounts {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .tip_amount {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tip_amount .text p:nth-child(1) {
+      color: var(--white);
+    }
+
+    .tip_amount .text p:nth-child(2) {
+      font-size: 75%;
+      color: var(--grayish_cyan);
+    }
+
+    .tip_amount .numbers p {
+      font-size: 40px;
+      color: var(--strong_cyan);
     }
 
     /* .attribution {
@@ -175,17 +210,33 @@
     </div>
 
     <div class="results">
+      <div class="amounts">
+        <div class="tip_amount">
+          <div class="text">
+            <p>Tip Amount</p>
+            <p>/ person</p>
+          </div>
 
+          <div class="numbers">
+            <p>$ 0.00</p>
+          </div>
+        </div>
+
+        <div class="tip_amount">
+          <div class="text">
+            <p>Total</p>
+            <p>/ person</p>
+          </div>
+
+          <div class="numbers">
+            <p>$ 0.00</p>
+          </div>
+        </div>
+      </div>
+
+      <button>Reset</button>
     </div>
   </main>
-
-  <!-- Tip Amount -->
-  <!-- / person -->
-
-  <!-- Total -->
-  <!-- / person -->
-
-  <!-- Reset -->
 
   <!-- <footer class="attribution">
     <p>Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.</p>
