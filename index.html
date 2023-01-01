@@ -55,7 +55,6 @@
       border-radius: 2rem;
       padding: 3rem;
       gap: 3rem;
-      /* CORRIGIR */
       max-width: 60rem;
       width: 100%;
     }
@@ -185,17 +184,28 @@
       padding: .6rem 0;
       font-size: 18px;
       text-transform: uppercase;
+      cursor: pointer;
+      transition: .3s all ease-in-out;
       opacity: .1;
     }
 
-    /* .attribution {
-      font-size: 11px;
+    /* CORRIGIR */
+    .reset_btn:hover {
+      opacity: 50%;
+    }
+
+    .attribution {
+      position: absolute;
+      bottom: 0;
+      font-size: 9px;
       text-align: center;
+      padding: 1rem 0;
     }
 
     .attribution a {
-      color: hsl(228, 45%, 44%);
-    } */
+      text-decoration: none;
+      color: var(--very_dark_cyan);
+    }
   </style>
 </head>
 
@@ -216,12 +226,12 @@
         <label for="select_tip">Select Tip %</label>
 
         <div class="buttons_tip">
-          <button>5%</button>
-          <button>10%</button>
-          <button>15%</button>
-          <button>25%</button>
-          <button>50%</button>
-          <button>Custom</button>
+          <button class="btn_tip">5%</button>
+          <button class="btn_tip">10%</button>
+          <button class="btn_tip">15%</button>
+          <button class="btn_tip">25%</button>
+          <button class="btn_tip">50%</button>
+          <button class="btn_tip">Custom</button>
 
         </div>
       </div>
@@ -242,7 +252,7 @@
           </div>
 
           <div class="numbers">
-            <p>$ 0.00</p>
+            <p id="tip_amount">$ 0.00</p>
           </div>
         </div>
 
@@ -262,10 +272,31 @@
     </div>
   </main>
 
-  <!-- <footer class="attribution">
+  <footer class="attribution">
     <p>Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.</p>
     <p>Coded by <a href="https://github.com/RafaelHDSV" target="_blank">Rafael Henrique de Sousa Vieira</a>.</p>
-  </footer> -->
+  </footer>
+
+  <script>
+    let bill = document.getElementById('bill')
+    let btnTip = document.querySelectorAll('.btn_tip')
+    let tipAmount = document.getElementById('tip_amount')
+    let currentBtnTip = 0
+
+    for (let i = 0; i < btnTip.length; i++) {
+      btnTip[i].addEventListener('click', () => {
+        btnTip[i].style.backgroundColor = 'var(--strong_cyan)'
+        currentBtnTip = i
+
+        btnTip[i].addEventListener('click', () => {
+          // console.log(currentBtnTip);
+          // btnTip[currentBtnTip].style.backgroundColor = 'red'
+          // btnTip[i].style.backgroundColor = 'var(--strong_cyan)'
+          // currentBtnTip = i
+        })
+      })
+    }
+  </script>
 </body>
 
 </html>
