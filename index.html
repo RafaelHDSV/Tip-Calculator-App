@@ -40,9 +40,53 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      gap: 5rem;
       width: 100%;
       height: 100vh;
       background-color: var(--light_grayish_cyan);
+    }
+
+    main {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--white);
+      border-radius: 2rem;
+      padding: 3rem;
+      /* CORRIGIR */
+      height: 30rem;
+      /* CORRIGIR */
+      width: 60rem;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 50%;
+      height: 100%;
+    }
+
+    .options label {
+      color: var(--dark_grayish_cyan);
+    }
+
+    .bill {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+
+    .number_people {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+
+    .results {
+      width: 50%;
+      height: 100%;
     }
 
     /* .attribution {
@@ -60,25 +104,47 @@
 
   <img src="images/logo.svg" alt="logo.svg">
 
-  Bill
 
-  Select Tip %
-  5%
-  10%
-  15%
-  25%
-  50%
-  Custom
+  <main>
+    <div class="options">
+      <div class="bill">
+        <label for="bill">Bill</label>
+        <input id="bill" class="input_primary" type="text" name="bill" placeholder="0">
+      </div>
 
-  Number of People
+      <div class="select_tip">
+        <label for="select_tip">Select Tip %</label>
+      </div>
 
-  Tip Amount
-  / person
+      <div class="number_people">
+        <label for="number_people">Number of People</label>
+        <input id="number_people" class="input_primary" type="text" name="number_people" placeholder="0">
+      </div>
+    </div>
 
-  Total
-  / person
+    <div class="results">
 
-  Reset
+    </div>
+  </main>
+
+
+  <!--  -->
+  <!-- 5% -->
+  <!-- 10% -->
+  <!-- 15% -->
+  <!-- 25% -->
+  <!-- 50% -->
+  <!-- Custom -->
+
+  <!--  -->
+
+  <!-- Tip Amount -->
+  <!-- / person -->
+
+  <!-- Total -->
+  <!-- / person -->
+
+  <!-- Reset -->
 
   <!-- <footer class="attribution">
     <p>Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.</p>
