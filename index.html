@@ -288,12 +288,16 @@
         btnTip[i].style.backgroundColor = 'var(--strong_cyan)'
         currentBtnTip = i
 
-        btnTip[i].addEventListener('click', () => {
+        if (btnTip[i].addEventListener('click') = true) {
+          console.log('a');
+        }
+
+        // btnTip[i].addEventListener('click', () => {
           // console.log(currentBtnTip);
           // btnTip[currentBtnTip].style.backgroundColor = 'red'
           // btnTip[i].style.backgroundColor = 'var(--strong_cyan)'
           // currentBtnTip = i
-        })
+        // })
       })
     }
   </script>
