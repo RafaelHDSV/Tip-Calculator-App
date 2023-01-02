@@ -82,6 +82,7 @@
       text-align: end;
       font-size: 24px;
       position: relative;
+      width: 100%;
     }
 
     .input_primary::placeholder {
@@ -194,7 +195,6 @@
       opacity: .1;
     }
 
-    /* CORRIGIR */
     .reset_btn:hover {
       opacity: 50%;
     }
@@ -211,6 +211,11 @@
       text-decoration: none;
       color: var(--very_dark_cyan);
     }
+
+    .hide {
+      display: none;
+      opacity: 0;
+    }
   </style>
 </head>
 
@@ -223,7 +228,7 @@
     <div class="options">
       <div class="bill">
         <label for="bill">Bill</label>
-        <input id="bill" class="input_primary" type="text" name="bill" placeholder="0">
+        <input id="bill" class="input_primary" type="text" name="bill" placeholder="0" autocomplete="off">
         <img src="images/icon-dollar.svg" alt="icon-dollar.svg" class="icon_input">
       </div>
 
@@ -237,13 +242,14 @@
           <button class="btn_tip">25%</button>
           <button class="btn_tip">50%</button>
           <button class="btn_tip_custom">Custom</button>
-
+          <input id="custom" class="input_primary hide" type="text" name="custom" placeholder="0" autocomplete="off">
         </div>
       </div>
 
       <div class="number_people">
         <label for="number_people">Number of People</label>
-        <input id="number_people" class="input_primary" type="text" name="number_people" placeholder="0">
+        <input id="number_people" class="input_primary" type="text" name="number_people" placeholder="0"
+          autocomplete="off">
         <img src="images/icon-person.svg" alt="icon-person.svg" class="icon_input">
       </div>
     </div>
@@ -285,6 +291,8 @@
   <script>
     let bill = document.getElementById('bill')
     let btnTip = document.querySelectorAll('.btn_tip')
+    let btnTipCustom = document.querySelector('.btn_tip_custom')
+    let inputCustom = document.getElementById('custom')
     let numberPeople = document.getElementById('number_people')
     let tipAmount = document.getElementById('tip_amount')
     let total = document.getElementById('total')
@@ -292,15 +300,19 @@
     let currentBtnTip = 0
 
     function calc() {
-      console.log(bill.value);
-      console.log(currentBtnTip);
-      console.log(numberPeople.value);
-
-      tipAmount.innerHTML = `$ ${(((btnTip[currentBtnTip].textContent.replace('%', "") * bill.value) / 100) /
+      if (inputCustom.value == '') {
+        tipAmount.innerHTML = `$ ${(((btnTip[currentBtnTip].textContent.replace('%', "") * bill.value) / 100) /
         numberPeople.value).toFixed(2)}`
 
-      total.innerHTML = `$ ${((((btnTip[currentBtnTip].textContent.replace('%', "") * bill.value) / 100) + Number(bill
+        total.innerHTML = `$ ${((((btnTip[currentBtnTip].textContent.replace('%', "") * bill.value) / 100) + Number(bill
         .value)) / numberPeople.value).toFixed(2)}`
+      } else {
+        tipAmount.innerHTML = `$ ${(((inputCustom.value * bill.value) / 100) /
+        numberPeople.value).toFixed(2)}`
+
+        total.innerHTML = `$ ${((((inputCustom.value * bill.value) / 100) + Number(bill
+        .value)) / numberPeople.value).toFixed(2)}`
+      }
 
       if (tipAmount.innerHTML != '$ 0.00' && total.innerHTML != '$ 0.00') {
         resetBtn.style.opacity = '1'
@@ -319,17 +331,30 @@
 
     for (let i = 0; i < btnTip.length; i++) {
       btnTip[i].addEventListener('click', () => {
+        btnTipCustom.style.display = 'block'
+        inputCustom.value = ''
+        inputCustom.innerHTML = ''
+        inputCustom.classList.add('hide')
+
         btnTip[currentBtnTip].style.backgroundColor = 'var(--very_dark_cyan)'
         btnTip[i].style.backgroundColor = 'var(--strong_cyan)'
         currentBtnTip = i
       })
     }
 
+    btnTipCustom.addEventListener('click', () => {
+      btnTip[currentBtnTip].style.backgroundColor = 'var(--very_dark_cyan)'
+      btnTipCustom.style.display = 'none'
+      inputCustom.classList.remove('hide')
+    })
+
     bill.addEventListener('input', calc)
 
     for (let i = 0; i < btnTip.length; i++) {
       btnTip[i].addEventListener('click', calc)
     }
+
+    inputCustom.addEventListener('input', calc)
 
     numberPeople.addEventListener('input', calc)
 
