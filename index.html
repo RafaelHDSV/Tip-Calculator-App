@@ -285,18 +285,15 @@
 
     for (let i = 0; i < btnTip.length; i++) {
       btnTip[i].addEventListener('click', () => {
+        btnTip[currentBtnTip].style.backgroundColor = 'var(--very_dark_cyan)'
         btnTip[i].style.backgroundColor = 'var(--strong_cyan)'
         currentBtnTip = i
 
-        if (btnTip[i].addEventListener('click') = true) {
-          console.log('a');
-        }
-
         // btnTip[i].addEventListener('click', () => {
-          // console.log(currentBtnTip);
-          // btnTip[currentBtnTip].style.backgroundColor = 'red'
-          // btnTip[i].style.backgroundColor = 'var(--strong_cyan)'
-          // currentBtnTip = i
+        // console.log(currentBtnTip);
+        // btnTip[currentBtnTip].style.backgroundColor = 'red'
+        // btnTip[i].style.backgroundColor = 'var(--strong_cyan)'
+        // currentBtnTip = i
         // })
       })
     }
