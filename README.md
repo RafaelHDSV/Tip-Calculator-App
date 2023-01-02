@@ -29,8 +29,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: URL SOLUTION HERE
-- Live Site URL: URL SITE HERE
+- Solution URL: https://www.frontendmentor.io/solutions/tip-calculator-app-E6HcipMoFo
+- Live Site URL: https://tip-calculator-app-rafael.netlify.app
 
 ### Screenshot
 
