@@ -116,7 +116,8 @@
       padding: .5rem 0 0 0;
     }
 
-    .buttons_tip button {
+    .buttons_tip .btn_tip,
+    .buttons_tip .btn_tip_custom {
       outline: 0;
       border: none;
       border-radius: .5rem;
@@ -128,14 +129,18 @@
       transition: .3s all ease-in-out;
     }
 
-    .buttons_tip button:hover {
+    .buttons_tip .btn_tip:hover {
       background-color: var(--strong_cyan);
       opacity: .7;
     }
 
-    .buttons_tip button:last-child {
+    .buttons_tip .btn_tip_custom {
       background-color: var(--very_light_grayish_cyan);
       color: var(--dark_grayish_cyan);
+    }
+
+    .buttons_tip .btn_tip_custom:hover {
+      opacity: .7;
     }
 
     .results {
@@ -231,7 +236,7 @@
           <button class="btn_tip">15%</button>
           <button class="btn_tip">25%</button>
           <button class="btn_tip">50%</button>
-          <button class="btn_tip">Custom</button>
+          <button class="btn_tip_custom">Custom</button>
 
         </div>
       </div>
@@ -283,15 +288,33 @@
     let numberPeople = document.getElementById('number_people')
     let tipAmount = document.getElementById('tip_amount')
     let total = document.getElementById('total')
+    let resetBtn = document.querySelector('.reset_btn')
     let currentBtnTip = 0
 
     function calc() {
-      tipAmount.innerHTML = (((btnTip[currentBtnTip].textContent.replace('%', "") * bill.value) / 100) /
-        numberPeople
-        .value).toFixed(2)
+      console.log(bill.value);
+      console.log(currentBtnTip);
+      console.log(numberPeople.value);
 
-      total.innerHTML = ((((btnTip[currentBtnTip].textContent.replace('%', "") * bill.value) / 100) + Number(bill
-        .value)) / 5).toFixed(2)
+      tipAmount.innerHTML = `$ ${(((btnTip[currentBtnTip].textContent.replace('%', "") * bill.value) / 100) /
+        numberPeople.value).toFixed(2)}`
+
+      total.innerHTML = `$ ${((((btnTip[currentBtnTip].textContent.replace('%', "") * bill.value) / 100) + Number(bill
+        .value)) / numberPeople.value).toFixed(2)}`
+
+      if (tipAmount.innerHTML != '$ 0.00' && total.innerHTML != '$ 0.00') {
+        resetBtn.style.opacity = '1'
+      }
+
+      if (tipAmount.innerHTML == '$ Infinity' || tipAmount.innerHTML == '$ NaN' || total.innerHTML == '$ Infinity' ||
+        total
+        .innerHTML == '$ NaN') {
+        tipAmount.value = ''
+        tipAmount.innerHTML = '$ 0.00'
+
+        total.value = ''
+        total.innerHTML = '$ 0.00'
+      }
     }
 
     for (let i = 0; i < btnTip.length; i++) {
@@ -302,17 +325,13 @@
       })
     }
 
-    numberPeople.addEventListener('input', calc)
+    bill.addEventListener('input', calc)
 
-    if (numberPeople.value = '') {
-      bill.addEventListener('input', calc)
-
-      for (let i = 0; i < btnTip.length; i++) {
-        btnTip[i].addEventListener('click', calc)
-      }
-
-      numberPeople.addEventListener('input', calc)
+    for (let i = 0; i < btnTip.length; i++) {
+      btnTip[i].addEventListener('click', calc)
     }
+
+    numberPeople.addEventListener('input', calc)
 
     function reset() {
       bill.value = ''
@@ -325,6 +344,12 @@
 
       numberPeople.value = ''
       numberPeople.innerHTML = ''
+
+      tipAmount.value = ''
+      tipAmount.innerHTML = '$ 0.00'
+
+      total.value = ''
+      total.innerHTML = '$ 0.00'
     }
   </script>
 </body>
