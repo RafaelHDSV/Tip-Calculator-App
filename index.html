@@ -19,6 +19,7 @@
     /* font-family: 'Space Mono', monospace; */
 
     :root {
+      --red: hsl(0, 82%, 47%);
       --strong_cyan: hsl(172, 67%, 45%);
       --very_dark_cyan: hsl(183, 100%, 15%);
       --dark_grayish_cyan: hsl(186, 14%, 43%);
@@ -98,6 +99,12 @@
       margin: 2.7% 0 0 1rem;
       max-width: 1rem;
       width: 100%;
+    }
+
+    span {
+      position: absolute;
+      right: 53%;
+      color: var(--red);
     }
 
     .bill,
@@ -228,6 +235,7 @@
     <div class="options">
       <div class="bill">
         <label for="bill">Bill</label>
+        <span class="bill_span hide">Can't be zero</span>
         <input id="bill" class="input_primary" type="text" name="bill" placeholder="0" autocomplete="off">
         <img src="images/icon-dollar.svg" alt="icon-dollar.svg" class="icon_input">
       </div>
@@ -248,6 +256,7 @@
 
       <div class="number_people">
         <label for="number_people">Number of People</label>
+        <span class="number_people_span hide">Can't be zero</span>
         <input id="number_people" class="input_primary" type="text" name="number_people" placeholder="0"
           autocomplete="off">
         <img src="images/icon-person.svg" alt="icon-person.svg" class="icon_input">
@@ -297,9 +306,27 @@
     let tipAmount = document.getElementById('tip_amount')
     let total = document.getElementById('total')
     let resetBtn = document.querySelector('.reset_btn')
+    let errorMsgBill = document.querySelector('.bill_span')
+    let errorMsgNumberPeople = document.querySelector('.number_people_span')
     let currentBtnTip = 0
 
     function calc() {
+      if (bill.value == 0) {
+        bill.style.border = '2px solid var(--red)'
+        errorMsgBill.classList.remove('hide')
+      } else {
+        bill.style.border = '2px solid var(--strong_cyan)'
+        errorMsgBill.classList.add('hide')
+      }
+
+      if (numberPeople.value == 0) {
+        numberPeople.style.border = '2px solid var(--red)'
+        errorMsgNumberPeople.classList.remove('hide')
+      } else {
+        numberPeople.style.border = '2px solid var(--strong_cyan)'
+        errorMsgNumberPeople.classList.add('hide')
+      }
+
       if (inputCustom.value == '') {
         tipAmount.innerHTML = `$ ${(((btnTip[currentBtnTip].textContent.replace('%', "") * bill.value) / 100) /
         numberPeople.value).toFixed(2)}`
@@ -359,6 +386,8 @@
     numberPeople.addEventListener('input', calc)
 
     function reset() {
+      resetBtn.style.opacity = '0.1'
+
       bill.value = ''
       bill.innerHTML = ''
 
@@ -366,6 +395,11 @@
         btnTip[i].style.backgroundColor = 'var(--very_dark_cyan)'
         currentBtnTip = 0
       }
+
+      btnTipCustom.style.display = 'block'
+      inputCustom.value = ''
+      inputCustom.innerHTML = ''
+      inputCustom.classList.add('hide')
 
       numberPeople.value = ''
       numberPeople.innerHTML = ''
