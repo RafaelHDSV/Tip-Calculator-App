@@ -263,7 +263,7 @@
           </div>
 
           <div class="numbers">
-            <p>$ 0.00</p>
+            <p id="total">$ 0.00</p>
           </div>
         </div>
       </div>
@@ -280,22 +280,38 @@
   <script>
     let bill = document.getElementById('bill')
     let btnTip = document.querySelectorAll('.btn_tip')
+    let numberPeople = document.getElementById('number_people')
     let tipAmount = document.getElementById('tip_amount')
+    let total = document.getElementById('total')
     let currentBtnTip = 0
+
+    function calc() {
+      tipAmount.innerHTML = (((btnTip[currentBtnTip].textContent.replace('%', "") * bill.value) / 100) /
+        numberPeople
+        .value).toFixed(2)
+
+      total.innerHTML = ((((btnTip[currentBtnTip].textContent.replace('%', "") * bill.value) / 100) + Number(bill
+        .value)) / 5).toFixed(2)
+    }
 
     for (let i = 0; i < btnTip.length; i++) {
       btnTip[i].addEventListener('click', () => {
         btnTip[currentBtnTip].style.backgroundColor = 'var(--very_dark_cyan)'
         btnTip[i].style.backgroundColor = 'var(--strong_cyan)'
         currentBtnTip = i
-
-        // btnTip[i].addEventListener('click', () => {
-        // console.log(currentBtnTip);
-        // btnTip[currentBtnTip].style.backgroundColor = 'red'
-        // btnTip[i].style.backgroundColor = 'var(--strong_cyan)'
-        // currentBtnTip = i
-        // })
       })
+    }
+
+    numberPeople.addEventListener('input', calc)
+
+    if (numberPeople.value = '') {
+      bill.addEventListener('input', calc)
+
+      for (let i = 0; i < btnTip.length; i++) {
+        btnTip[i].addEventListener('click', calc)
+      }
+
+      numberPeople.addEventListener('input', calc)
     }
   </script>
 </body>
