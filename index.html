@@ -268,7 +268,7 @@
         </div>
       </div>
 
-      <button class="reset_btn">Reset</button>
+      <button class="reset_btn" onclick="reset()">Reset</button>
     </div>
   </main>
 
@@ -312,6 +312,19 @@
       }
 
       numberPeople.addEventListener('input', calc)
+    }
+
+    function reset() {
+      bill.value = ''
+      bill.innerHTML = ''
+
+      for (let i = 0; i < btnTip.length; i++) {
+        btnTip[i].style.backgroundColor = 'var(--very_dark_cyan)'
+        currentBtnTip = 0
+      }
+
+      numberPeople.value = ''
+      numberPeople.innerHTML = ''
     }
   </script>
 </body>
